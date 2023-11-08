@@ -64,11 +64,20 @@
     </div>
 
     <script>
+        let data;
+
         fetch('data.json').then(r => r.json()).then(d => init(d));
 
-        function init(data) {
+        function init(d) {
+            data = d;
             const s = document.querySelector('#s');
-            s.addEventListener('keyup', e => list(filter(data.b, s.value)));
+            s.addEventListener('keyup', e => refresh());
+            refresh();
+        }
+
+        function refresh() {
+            const s = document.querySelector('#s');
+            list(filter(data.b, s.value));
         }
 
         function filter(array, value) {
